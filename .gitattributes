@@ -1,4 +1,7 @@
+# --- Configuracion de Saltos de Línea (EOL) ---
 * text=auto
+
+# LF (Line Feed)
 *.java text eol=lf
 *.md text eol=lf
 *.yml text eol=lf
@@ -10,3 +13,37 @@
 *.html text eol=lf
 *.css text eol=lf
 *.xml text eol=lf
+*.properties text eol=lf
+
+# --- Manejo de Archivos Binarios e Imagenes (no hacer diff) ---
+*.jpg binary -diff
+*.jpeg binary -diff
+*.png binary -diff
+*.gif binary -diff
+*.bmp binary -diff
+*.ico binary -diff
+*.svg -diff
+*.pdf binary -diff
+*.zip binary -diff
+*.tar binary -diff
+*.gz binary -diff
+*.rar binary -diff
+*.7z binary -diff
+*.exe binary -diff
+*.dll binary -diff
+*.so binary -diff
+*.jar binary -diff
+*.war binary -diff
+*.class binary -diff
+
+# --- Excluir archivos de "git archive" ---
+target/ export-ignore
+*.iml export-ignore
+.idea/ export-ignore
+build/ export-ignore
+*.zip export-ignore
+*.tar export-ignore
+*.log export-ignore
+
+# --- Configuracion para Linguist (GitHub/GitLab) ---
+*.java linguist-language=Java
