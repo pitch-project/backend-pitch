@@ -1,0 +1,46 @@
+spring:
+  data:
+    rest:
+      base-path: /api/v1/feature/payment-service
+  application:
+    name: payment-service
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8082
+  error:
+    include-stacktrace: always
+
+logging:
+  level:
+    root: INFO # Nivel de log por defecto para toda la aplicaci?n. DEBUG ->logs en general.
+
+    # Tu paquete base de la aplicaci?n. Para ver logs de tu propio c?digo.
+    org.pitch.payment_service: DEBUG
+
+    # Detalles de Spring Framework
+    org.springframework: INFO # Nivel general para el framework Spring.
+    org.springframework.boot: DEBUG # Detalles de arranque y configuraci?n de Spring Boot.
+    org.springframework.web: DEBUG # Detalles del procesamiento de peticiones web (controladores, interceptores).
+
+    # Detalles espec?ficos de Spring Data JPA
+    org.springframework.data.jpa: DEBUG # Para ver c?mo Spring Data JPA interact?a con los repositorios.
+
+    # Detalles de transacciones y ORM (JPA/Hibernate)
+    org.springframework.orm.jpa: DEBUG # Nivel para las operaciones de JPA dentro de Spring.
+    org.springframework.transaction: TRACE # Nivel m?s detallado para la gesti?n de transacciones. Esto es muy ?til.
+
+    # Configuraci?n de Hibernate para ver las sentencias SQL y sus par?metros
+    org.hibernate.SQL: DEBUG # Muestra todas las sentencias SQL generadas y ejecutadas por Hibernate.
+    # Para ver los par?metros que se bindean a las consultas SQL:
+    # Usa esta para versiones recientes de Hibernate (5.2+ y Spring Boot 2.x+)
+    org.hibernate.orm.jdbc.bind: TRACE

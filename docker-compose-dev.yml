@@ -19,12 +19,16 @@ services:
     #networks:
       #- app-network
 
-  #payment-service:
-    #build: ./payment-service
-    #ports:
-      #- "8082:8082"
-    #networks:
-      #- app-network
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "8082:8082"
+    environment:
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+    depends_on:
+      - postgres-db
+    networks:
+      - app-network
 
   #audit-service:
     #build: ./audit-service

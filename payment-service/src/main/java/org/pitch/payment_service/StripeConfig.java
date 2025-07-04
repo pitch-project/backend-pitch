@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class StripeConfig {
   // Posteriomente COnfigurar Servicio De Stripe
   // Inyecta el valor de la variable de entorno directamente
-  @Value("${STRIPE_SECRET_KEY}")
+  @Value("${STRIPE_API_KEY}")
   private String stripeSecretKey;
 
   // Este método se ejecutará automáticamente después de que el bean se haya inicializado

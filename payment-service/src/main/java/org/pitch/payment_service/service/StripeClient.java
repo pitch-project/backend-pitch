@@ -1,11 +1,9 @@
 package org.pitch.payment_service.service;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.Customer;
-import com.stripe.model.Price;
-import com.stripe.model.Product;
-import com.stripe.model.Subscription;
+import com.stripe.model.*;
 import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.SubscriptionCreateParams;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +11,28 @@ import org.springframework.stereotype.Service;
 public class StripeClient {
   public StripeClient() {
     System.out.println("Initializing Stripe Client");
+  }
+
+  /**
+  *  paymentIntent.capture()
+  * */
+
+  public PaymentIntent createPaymentIntent(Long amount,
+                                           String currency,
+                                           String paymentMethod,
+                                           String description)
+      throws StripeException {
+    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+        .setAmount(amount)
+        .setCurrency(currency)
+        .addPaymentMethodType("card")
+        .setPaymentMethod(paymentMethod)
+        .setDescription(description)
+        .setConfirm(true)
+        .setCaptureMethod(PaymentIntentCreateParams.CaptureMethod.AUTOMATIC)
+        .build();
+
+    return PaymentIntent.create(params);
   }
 
   public Customer createStripeCustomer(String name, String email)
@@ -37,11 +57,14 @@ public class StripeClient {
     return Subscription.create(params);
   }
 
+  /**
+   *  product.retrieve()
+   *  price.retrieve()
   public Product retrieveProduct(String productId) throws StripeException {
     return Product.retrieve(productId);
   }
 
   public Price retrievePrice(String priceId) throws StripeException {
     return Price.retrieve(priceId);
-  }
+  }* */
 }

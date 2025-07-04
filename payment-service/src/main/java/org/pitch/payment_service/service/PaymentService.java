@@ -2,6 +2,7 @@ package org.pitch.payment_service.service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import com.stripe.model.PaymentIntent;
 import com.stripe.model.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,15 @@ public class PaymentService {
   @Autowired
   public PaymentService(StripeClient stripeClient) {
     this.stripeClient = stripeClient;
+  }
+
+  public String processTestTransaction(Long amount, String currency, String paymentMethod, String description) {
+    try {
+      PaymentIntent paymentIntent = stripeClient.createPaymentIntent(amount, currency, paymentMethod, description);
+      return "Payment intent created: " + paymentIntent.getId();
+    } catch (StripeException e) {
+      return "Error: " + e.getMessage();
+    }
   }
 
   public String registerUserAndSubscribe(String userName, String userEmail, String planPriceId) {
